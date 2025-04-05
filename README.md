@@ -1,6 +1,6 @@
 # 📝 Product Review Sentiment Analyzer
 
-This is a simple NLP project that analyzes the sentiment of product reviews using TextBlob. It classifies the review as **Positive**, **Negative**, or **Neutral**, and shows a word cloud based on the input.
+This is a simple NLP project that analyzes the sentiment of product reviews using VADER (Valence Aware Dictionary and sEntiment Reasoner), which is well-suited for short texts like customer reviews and handles negation better than traditional models.
 
 ## 💡 Features
 - Real-time sentiment analysis from user input
@@ -10,10 +10,10 @@ This is a simple NLP project that analyzes the sentiment of product reviews usin
 
 ## 🔧 Tools Used
 - Python
-- TextBlob
+- VADER (via NLTK)
 - WordCloud
 - Matplotlib
-- Google Colab
+- Streamlit
 
 ## 🚀 How to Use
 1. Open the Colab notebook.
