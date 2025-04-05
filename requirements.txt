@@ -1,0 +1,3 @@
+textblob
+wordcloud
+matplotlib
