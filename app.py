@@ -1,31 +1,38 @@
-
 import streamlit as st
-from textblob import TextBlob
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import nltk
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-# Title
-st.title("📝 Product Review Sentiment Analyzer")
+# Download VADER lexicon (only the first time)
+nltk.download('vader_lexicon')
 
-# User input
+# Initialize VADER
+analyzer = SentimentIntensityAnalyzer()
+
+# Title
+st.title("📝 Product Review Sentiment Analyzer (VADER Version)")
+
+# Input
 user_input = st.text_area("Enter your product review:")
 
-# Analyze button
+# Analyze Button
 if st.button("Analyze Sentiment"):
-    blob = TextBlob(user_input)
-    polarity = blob.sentiment.polarity
+    scores = analyzer.polarity_scores(user_input)
+    polarity = scores['compound']
 
-    if polarity > 0:
+    # Determine sentiment label
+    if polarity >= 0.05:
         sentiment = "Positive 😊"
-    elif polarity < 0:
+    elif polarity <= -0.05:
         sentiment = "Negative 😞"
     else:
         sentiment = "Neutral 😐"
 
     st.markdown(f"**Sentiment:** {sentiment}")
-    st.markdown(f"**Polarity Score:** {round(polarity, 3)}")
+    st.markdown(f"**Compound Score:** {round(polarity, 3)}")
 
-    # Word cloud
+    # Word Cloud
     if user_input:
         wordcloud = WordCloud(width=600, height=400, background_color='white').generate(user_input)
         st.subheader("Word Cloud")
